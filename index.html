@@ -1,0 +1,73 @@
+<!doctype html>
+<html ng-app="ScannerApp">
+<head>
+    <script src="lib/angular/angular_1.2.0-rc.3.js"></script>
+    <script src="lib/angular/angular-animate_1.2.0-rc.3.js"></script>
+    <script src="lib/angular/angular-route_1.2.0-rc.3.js"></script>
+    <script src="js/controller.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Scan Hero</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/app.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div ng-controller="ScannerCtrl">
+    <div class="container">
+
+        <div class="jumbotron" style="background-color:{{goalColor}}">
+            <h1 class="text-center">{{goalText}}</h1>
+        </div>
+
+        <div class="jumbotron text-center">
+            <h1>{{timeleft}}</h1>
+        </div>
+
+        <div class="jumbotron text-center">
+            <h1>{{score}}</h1>
+
+            <div ng-if="submitScore">
+                    <input class="form-control" type="text" ng-model="name"  size="30"
+                           placeholder="Enter Your Initials">
+                    <button class="btn btn-primary" ng-click="addScore(name)">SUBMIT</button>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p class="text-center">
+                <form class="center-block text-center" ng-submit="addCode(currentCode)">
+                <input type="text" ng-model="currentCode"  size="30" id="entryZone"
+                   placeholder="SCAN TO START">
+                <input class="btn-primary" style="display:none" type="submit" value="add">
+                </form>
+            </p>
+        </div>
+
+        <div class="jumbotron text-center">
+            <h3 ng-repeat="highscore in highscores | orderBy:'score':true ">{{$index +1}}.  {{highscore.name}}   {{highscore.score}}</h3>
+        </div>
+    </div>
+
+
+
+
+</div>
+
+<script>
+    (function(){
+        document.getElementById("entryZone").focus();
+    })()
+</script>
+
+</body>
+</html>
